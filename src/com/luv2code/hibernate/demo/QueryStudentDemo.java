@@ -10,6 +10,7 @@ import com.luv2code.hibernate.demo.entity.Student;
 
 public class QueryStudentDemo {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 
 		// create session factory
@@ -44,10 +45,10 @@ public class QueryStudentDemo {
 			System.out.println("\n\nStudents who have last name of Doe OR first name Daffy");
 			displayStudents(theStudents);
 
-			// query students where email LIKE '%luv2code.com'
-			theStudents = session.createQuery("from Student s where" + " s.email LIKE '%luv2code.com'").getResultList();
+			// query students where email LIKE '%gmail.com'
+			theStudents = session.createQuery("from Student s where" + " s.email LIKE '%gmail.com'").getResultList();
 
-			System.out.println("\n\nStudents whose email ends with luv2code.com");
+			System.out.println("\n\nStudents whose email ends with gmail.com");
 			displayStudents(theStudents);
 
 			// commit transaction
