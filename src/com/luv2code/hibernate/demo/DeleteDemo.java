@@ -1,4 +1,4 @@
-package com.luv2code.hibernate;
+package com.luv2code.hibernate.demo;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
