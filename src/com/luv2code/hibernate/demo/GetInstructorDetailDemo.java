@@ -11,20 +11,17 @@ public class GetInstructorDetailDemo {
 
 	public static void main(String[] args) {
 
-		// create session factory
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
+		
+
+		try(SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class).buildSessionFactory();
-
-		// create session
-		Session session = factory.getCurrentSession();
-
-		try {
+				Session session = factory.getCurrentSession()) {
 
 			// start a transaction
 			session.beginTransaction();
 
 			// get the instructor detail object
-			int theId = 2;
+			int theId = 2999;
 			InstructorDetail tempInstructorDetail = session.get(InstructorDetail.class, theId);
 
 			// print the instructor detail
@@ -39,11 +36,7 @@ public class GetInstructorDetailDemo {
 			System.out.println("Done!");
 		} catch (Exception exc) {
 			exc.printStackTrace();
-		} finally {
-			// handle connection leak issue
-			session.close();
-
-			factory.close();
+		
 		}
 	}
 

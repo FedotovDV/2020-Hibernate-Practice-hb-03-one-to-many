@@ -12,14 +12,9 @@ public class CreateDemo {
 
 	public static void main(String[] args) {
 
-		// create session factory
-		SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
+		try(SessionFactory factory = new Configuration().configure("hibernate.cfg.xml").addAnnotatedClass(Instructor.class)
 				.addAnnotatedClass(InstructorDetail.class).buildSessionFactory();
-
-		// create session
-		Session session = factory.getCurrentSession();
-
-		try {
+				Session session = factory.getCurrentSession()) {
 
 			// create the objects			
 			  Instructor tempInstructor = new Instructor("Chad", "Darby",
@@ -47,8 +42,9 @@ public class CreateDemo {
 			session.getTransaction().commit();
 
 			System.out.println("Done!");
-		} finally {
-			factory.close();
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		
 		}
 	}
 
