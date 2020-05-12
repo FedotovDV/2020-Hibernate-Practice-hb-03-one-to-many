@@ -36,7 +36,6 @@ public class GetInstructorDetailDemo {
 			System.out.println("Done!");
 		} catch (Exception exc) {
 			exc.printStackTrace();
-		
 		}
 	}
 
