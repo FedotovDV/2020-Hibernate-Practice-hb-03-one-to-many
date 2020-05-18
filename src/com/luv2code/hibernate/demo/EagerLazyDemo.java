@@ -11,30 +11,41 @@ import com.luv2code.hibernate.demo.entity.InstructorDetail;
 public class EagerLazyDemo {
 
 	public static void main(String[] args) {
-
 		try (SessionFactory factory = new Configuration().configure("hibernate.cfg.xml")
 				.addAnnotatedClass(Instructor.class).addAnnotatedClass(InstructorDetail.class)
-				.addAnnotatedClass(Course.class).buildSessionFactory(); Session session = factory.getCurrentSession()) {
-
+				.addAnnotatedClass(Course.class).buildSessionFactory(); Session session = factory.getCurrentSession()) {	
+			
 			// start a transaction
 			session.beginTransaction();
-
+			
 			// get the instructor from db
 			int theId = 1;
-			Instructor tempInstructor = session.get(Instructor.class, theId);
-
-			System.out.println("Instructor: " + tempInstructor);
-
-			// get courses for the instructor
-			System.out.println("Courses: " + tempInstructor.getCourses());
-
+			Instructor tempInstructor = session.get(Instructor.class, theId);		
+			
+			System.out.println("luv2code: Instructor: " + tempInstructor);
+		
+			System.out.println("luv2code: Courses: " + tempInstructor.getCourses());
+			
 			// commit transaction
 			session.getTransaction().commit();
+			
+			session.close();
+			
+			System.out.println("\nluv2code: The session is now closed!\n");
 
-			System.out.println("Done!");
+			// option 1: call getter method while session is open
+			
+			// get courses for the instructor
+			System.out.println("luv2code: Courses: " + tempInstructor.getCourses());
+			
+			
+			System.out.println("luv2code: Done!");
 		} catch (Exception exc) {
 			exc.printStackTrace();
 		}
 	}
 
 }
+
+
+
